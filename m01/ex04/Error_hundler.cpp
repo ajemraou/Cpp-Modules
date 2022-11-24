@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Error_hundler.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:33:11 by ajemraou          #+#    #+#             */
-/*   Updated: 2022/11/24 16:50:51 by ajemraou         ###   ########.fr       */
+/*   Created: 2022/11/24 20:53:41 by ajemraou          #+#    #+#             */
+/*   Updated: 2022/11/24 20:54:50 by ajemraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-
-Zombie::Zombie()
+int	error_hundler()
 {
-
-}
-
-Zombie::Zombie(std::string n):name(n)
-{
-	announce();
-}
-
-void Zombie::announce()
-{
-	std::cout << name;
-	std::cout << " : BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-Zombie::~Zombie()
-{
-	std::cout << "Zombie... " << name << " Destroyed !!!" << std::endl;
+	    if (!filestream)
+        {
+			std::cerr << "Error : opening file " << file << " dosen't exist \n";
+			return (0);
+		}
+		else if (filestream.peek() == std::ifstream::traits_type::eof())
+		{
+			std::cerr << "Error : Empty file \n";
+			return (0);
+		}
 }

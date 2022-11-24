@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:33:11 by ajemraou          #+#    #+#             */
-/*   Updated: 2022/11/24 16:50:51 by ajemraou         ###   ########.fr       */
+/*   Created: 2022/11/19 16:01:44 by ajemraou          #+#    #+#             */
+/*   Updated: 2022/11/22 09:49:09 by ajemraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 Zombie::Zombie()
 {
-
+	
 }
 
-Zombie::Zombie(std::string n):name(n)
+Zombie::~Zombie()
 {
-	announce();
+	std::cout << "Zombie " << name << " Destroyed !!!" << std::endl; 
 }
 
-void Zombie::announce()
+void Zombie::announce( void )
 {
 	std::cout << name;
 	std::cout << " : BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-Zombie::~Zombie()
+void Zombie::set_name(std::string name)
 {
-	std::cout << "Zombie... " << name << " Destroyed !!!" << std::endl;
+	this->name = name;
 }

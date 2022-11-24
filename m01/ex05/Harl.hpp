@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:33:11 by ajemraou          #+#    #+#             */
-/*   Updated: 2022/11/24 16:50:51 by ajemraou         ###   ########.fr       */
+/*   Created: 2022/11/22 15:14:58 by ajemraou          #+#    #+#             */
+/*   Updated: 2022/11/24 15:22:03 by ajemraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HARL_CPP
+#define HARL_CPP
 
-Zombie::Zombie()
-{
+#include <iostream>
 
-}
+class Harl{
+	typedef void (Harl::*pmf)(void);
+	void debug( void );
+	void info( void );
+	void warning( void );
+	void error( void );
+	pmf functions[4];
+public:
+    Harl();
+	void complain( std::string );
+};
 
-Zombie::Zombie(std::string n):name(n)
-{
-	announce();
-}
-
-void Zombie::announce()
-{
-	std::cout << name;
-	std::cout << " : BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-Zombie::~Zombie()
-{
-	std::cout << "Zombie... " << name << " Destroyed !!!" << std::endl;
-}
+#endif /* HARL */

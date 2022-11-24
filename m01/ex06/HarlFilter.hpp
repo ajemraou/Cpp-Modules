@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HarlFilter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:33:11 by ajemraou          #+#    #+#             */
-/*   Updated: 2022/11/24 16:50:51 by ajemraou         ###   ########.fr       */
+/*   Created: 2022/11/24 15:32:20 by ajemraou          #+#    #+#             */
+/*   Updated: 2022/11/24 15:48:42 by ajemraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HARLFILTER_HPP
+#define HARLFILTER_HPP
 
-Zombie::Zombie()
-{
+#include <iostream>
 
-}
+class HarlFilter{
+	void debug( void );
+	void info( void );
+	void warning( void );
+	void error( void );
+public:
+    HarlFilter();
+	void complain( std::string );
+};
 
-Zombie::Zombie(std::string n):name(n)
-{
-	announce();
-}
-
-void Zombie::announce()
-{
-	std::cout << name;
-	std::cout << " : BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-Zombie::~Zombie()
-{
-	std::cout << "Zombie... " << name << " Destroyed !!!" << std::endl;
-}
+#endif /* HARL */

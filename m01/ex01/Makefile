@@ -5,21 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/25 21:33:08 by ajemraou          #+#    #+#              #
-#    Updated: 2022/11/19 16:00:53 by ajemraou         ###   ########.fr        #
+#    Created: 2022/11/19 16:01:41 by ajemraou          #+#    #+#              #
+#    Updated: 2022/11/24 16:55:20 by ajemraou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 
-CFLAGE = -Wall -Wextra -Werror -std=c++98
+CFLAGE = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 SRC =	main.cpp \
 		Zombie.cpp \
-		newZombie.cpp \
-		randomChump.cpp 
+		zombieHorde.cpp
 
-NAME = Zombie
+NAME = ZombieHorde
 
 OBJ = ${SRC:.cpp=.o}
 

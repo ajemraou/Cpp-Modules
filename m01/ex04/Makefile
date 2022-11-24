@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ajemraou <ajemraou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/25 21:33:08 by ajemraou          #+#    #+#              #
-#    Updated: 2022/11/19 16:00:53 by ajemraou         ###   ########.fr        #
+#    Created: 2022/11/22 10:31:34 by ajemraou          #+#    #+#              #
+#    Updated: 2022/11/22 15:11:11 by ajemraou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,9 @@ CC = c++
 
 CFLAGE = -Wall -Wextra -Werror -std=c++98
 
-SRC =	main.cpp \
-		Zombie.cpp \
-		newZombie.cpp \
-		randomChump.cpp 
+SRC = main.cpp
 
-NAME = Zombie
+NAME = Replace
 
 OBJ = ${SRC:.cpp=.o}
 
