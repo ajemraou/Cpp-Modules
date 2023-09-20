@@ -19,19 +19,51 @@
 #include <deque>
 #include <vector>
 #include <cstdlib>
+#include <algorithm>
+#include <iterator>
+#include <utility>
+#include <sys/time.h>
 
 class PmergeMe
 {
 	std::vector<int>	myvector;
 	std::deque<int>		mydeque;
-	
+	/* ------------------------ */
+	std::vector<std::pair<int, int> >	vectorPairs;
+	std::deque<std::pair<int, int> >	dequePairs;
+	/* -------------------------*/
+	std::pair<int, int>	pairs;
+
+	int					rest;
+	bool				paired;
+
+	long				start;
+	long				end;
 public:
-	// PmergeMe(  );
+	PmergeMe(  );
 	
 	bool	parseArgs(  char **);
 	bool	isnum( const std::string );
+
 	void	MergeInsertionSort();
-	void	print();
+	
+	template<typename iter>
+	void	GroupTheElements( iter, iter );
+	
+
+	void	InsertAtTheStartV(  );
+	void	SearchAndReplaceV( );
+
+	void	InsertAtTheStartD(  );
+	void	SearchAndReplaceD( );
+
+	template <typename T>
+	void	printMessage( const std::string, T, T );
+	void	print_pairs();
+
+	void	SortVecor();
+	void	SortDeque();
+
 };
 
 #endif /* */

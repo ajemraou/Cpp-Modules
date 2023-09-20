@@ -19,6 +19,7 @@ int main( int ac, char **av )
 	{
 		PmergeMe obj;
 		obj.parseArgs(av);
-		obj.print();
+		
+		obj.MergeInsertionSort();
 	}
 }
