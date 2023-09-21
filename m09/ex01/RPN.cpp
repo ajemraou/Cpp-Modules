@@ -11,13 +11,10 @@
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-#include <cctype>
-#include <cstddef>
 
 RPN::RPN( const std::string input ):input(input)
 {
-	operatorCounter = 0;
-	numberCounter = 0;
+	isoperator = false;
 }
 
 RPN::~RPN()
@@ -30,7 +27,7 @@ bool	RPN::allowedCharacters( const std::string value )
 	size_t	size;
 
 	size = value.size();
-	for (int i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		if ( isdigit(value[i]) == false )
 		{
@@ -47,7 +44,11 @@ bool	RPN::allowedCharacters( const std::string value )
 bool	RPN::Calculate( int c )
 {
 	int	value;
-
+	
+	if ( mystack.empty() == true )
+	{
+		return false;
+	}
 	if ( c == '-' )
 	{
 		value = mystack.top();
@@ -79,18 +80,38 @@ bool	RPN::Calculate( int c )
 	return (true);
 }
 
-bool	RPN::validSequence( const std::string value )
+bool	RPN::PushToStack( const std::string value )
 {
-	char	c;
+	std::string	number;
 
-	c = value[0];
-	if ( isdigit(c) == true )
+	size_t	index;
+	size_t	size;
+	char	ope;
+
+	index = 0;
+	size = value.size();
+	while ( index < size )
 	{
-		mystack.push(atoi(value.c_str()));
-	}
-	else
-	{
-		return (Calculate( c ));
+		number = value[index];
+		if ( isdigit(value[index]) == true )
+		{
+			if (isoperator == true && mystack.size() != 1)
+			{
+				return false;
+			}
+			mystack.push(atoi(number.c_str()));
+			isoperator = false;
+		}
+		else
+		{
+			isoperator = true;
+			ope = value[index];
+			if (Calculate(ope) == false)
+			{
+				return false;
+			}
+		}
+		index++;
 	}
 	return (true);
 }
@@ -101,24 +122,24 @@ void	RPN::CheckErrors()
 	
 	while ( input >> value )
 	{
-		if (allowedCharacters( value ) == false)
+		if ( allowedCharacters( value ) == false)
 		{
 			std::cerr << "Error" << std::endl;
 			return ;
 		}
-		if ( validSequence( value )  == false )
+		if ( PushToStack( value ) == false )
 		{
 			std::cerr << "Error" << std::endl;
 			return ;
 		}
 	}
-	if ( mystack.size() != 1 )
+	if ( mystack.size() == 1 )
 	{
-		std::cerr << "Error" << std::endl;
+		std::cout << mystack.top() << std::endl;
 	}
 	else
 	{
-		std::cout << mystack.top() << std::endl;
+		std::cerr << "Error" << std::endl;
 	}
 }
 

@@ -15,7 +15,7 @@
 int main( int ac, char **av )
 {
 
-	if (ac != 1)
+	if (ac > 2)
 	{
 		PmergeMe obj;
 		obj.parseArgs(av);

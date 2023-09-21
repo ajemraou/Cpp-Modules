@@ -17,12 +17,12 @@ BitcoinExchange::BitcoinExchange( const std::string &infile ):Infile(infile.c_st
 {
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange&)
+BitcoinExchange::BitcoinExchange( const BitcoinExchange& )
 {
 
 }
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange&)
+BitcoinExchange& BitcoinExchange::operator=( const BitcoinExchange& )
 {
     return *this;
 }
@@ -34,26 +34,31 @@ BitcoinExchange::~BitcoinExchange()
 
 void    BitcoinExchange::StoreValue()
 {
-    std::string key;
-    std::string value;
-    std::string::size_type pos;
+	std::string key;
+	std::string value;
+	std::string::size_type pos;
 
-    if (Dbfile.is_open() == true)
+	if (Dbfile.is_open() == true)
     {
-        while ( std::getline(Dbfile, Dbcontent) )
-        {
-            pos = Dbcontent.find(',');
-            if (pos != std::string::npos)
-            {
-                key = Dbcontent.substr(0, pos);
-                value = Dbcontent.substr(pos + 1, Dbcontent.size());
+		while ( std::getline(Dbfile, Dbcontent) )
+		{
+			pos = Dbcontent.find(',');
+			if (pos != std::string::npos)
+			{
+				key = Dbcontent.substr(0, pos);
+		    	value = Dbcontent.substr(pos + 1, Dbcontent.size());
+
 				if ( IsValidDate( key ) == true )
 				{
-                	DBase.insert(std::pair<std::string, float>(key, std::atof(value.c_str())));
+					DBase.insert(std::pair<std::string, float>(key, std::atof(value.c_str())));
 				}
 			}
-        }
-    }
+		}
+	}
+	else
+	{
+		std::cerr << "Error : database doesn't exist!" << std::endl;
+	}
 }
 
 bool    BitcoinExchange::IsValidDate( const std::string &Date )
@@ -73,21 +78,21 @@ bool    BitcoinExchange::IsValidDate( const std::string &Date )
 		/* Is a valid Year */
 		DateValue = Date.substr(0, fpos);
 		number = std::atoi(DateValue.c_str());
-		if ( number <= 0 || number >= 2099)
+		if ( number <= 0 || number >= 2099 || DateValue.size() > 8 )
 		{
 			return (false);
 		}
 		/* Is a valid Month */
 		DateValue = Date.substr(fpos + 1, lpos - fpos - 1);
 		number = std::atoi(DateValue.c_str());
-		if ( number <= 0 || number > 12 )
+		if ( number <= 0 || number > 12 || DateValue.size() > 8 )
 		{
 			return (false);
 		}
 		/* Is a valid Day */
 		DateValue = Date.substr(lpos + 1, Date.size() - lpos - 1);
 		number = std::atoi(DateValue.c_str());
-		if ( number <= 0 || number > 31 )
+		if ( number <= 0 || number > 31 || DateValue.size() > 8 )
 		{
 			return (false);
 		}
@@ -144,11 +149,12 @@ bool	BitcoinExchange::IsValidNumber( std::string value )
 void	BitcoinExchange::ParseAndDisplay()
 {
 	float		number;
+
 	std::string key;
     std::string value;
     std::string::size_type pos;
 
-    if (Infile.is_open() == true)
+    if ( Infile.is_open() == true && Dbfile.is_open() == true )
     {
         while ( std::getline(Infile, Fcontent) )
         {

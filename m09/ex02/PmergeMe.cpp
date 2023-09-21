@@ -178,7 +178,7 @@ void	PmergeMe::SortVecor()
 
 void	PmergeMe::SortDeque()
 {
-	printMessage( "Before: ", mydeque.begin(), mydeque.end());
+	/*printMessage( "Before: ", mydeque.begin(), mydeque.end());*/
 	start = GetTime();
 	GroupTheElements(mydeque.begin(), mydeque.end());
 	std::sort(vectorPairs.begin(), vectorPairs.end());
@@ -186,8 +186,8 @@ void	PmergeMe::SortDeque()
 	InsertAtTheStartD( );
 	SearchAndReplaceD( );
 	end = GetTime();
-	printMessage( "After: ", mydeque.begin(), mydeque.end());
-	std::cout << "Time to process a range of " << mydeque.size() << " elements with std::deque : " << (double)(end - start) << " us" << std::endl;
+	/*printMessage( "After: ", mydeque.begin(), mydeque.end());*/
+	std::cout << "Time to process a range of " << mydeque.size() << " elements with std::deque : " << (end - start) << " us" << std::endl;
 }
 
 void	PmergeMe::MergeInsertionSort()
@@ -195,9 +195,3 @@ void	PmergeMe::MergeInsertionSort()
 	SortVecor();
 	SortDeque();
 }
-
-/* first step : goup the elements into n/2*/
-/* second step : */
-/* third step : */
-/* fourth step : */
-/* fifth step : */

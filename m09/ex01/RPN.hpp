@@ -25,15 +25,15 @@ class RPN
 	std::stack<unsigned int>	mystack;
 	
 	std::stringstream			input;
-	size_t						operatorCounter;
-	size_t						numberCounter;
+
+	bool						isoperator;
 public:
 	RPN( const std::string );
 	~RPN();
 
 	void	CheckErrors();
 	bool	allowedCharacters( const std::string );
-	bool	validSequence( const std::string );
+	bool	PushToStack( const std::string );
 	bool	Calculate( int  );
 };
 
