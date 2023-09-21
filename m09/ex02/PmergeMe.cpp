@@ -82,7 +82,7 @@ void	PmergeMe::GroupTheElements( iter begin, iter end )
 			}
 			else
 			{
-				vectorPairs.push_back(std::make_pair(*begin, *(begin + 1)));
+				Pairs.push_back(std::make_pair(*begin, *(begin + 1)));
 			}
 		}
 		number++;
@@ -90,18 +90,10 @@ void	PmergeMe::GroupTheElements( iter begin, iter end )
 	}
 }
 
-long	GetTime()
-{
-	struct timeval timev;
-
-    gettimeofday(&timev, NULL);
-	return (timev.tv_sec / 1000000 + timev.tv_usec);
-}
-
 void	PmergeMe::InsertAtTheStartV(  )
 {
-	std::vector<std::pair<int, int> >::iterator start = vectorPairs.begin();
-	std::vector<std::pair<int, int> >::iterator end = vectorPairs.end();
+	std::vector<std::pair<int, int> >::iterator start = Pairs.begin();
+	std::vector<std::pair<int, int> >::iterator end = Pairs.end();
 	while ( start != end )
 	{
 		myvector.push_back(start->first);
@@ -111,8 +103,8 @@ void	PmergeMe::InsertAtTheStartV(  )
 
 void	PmergeMe::InsertAtTheStartD(  )
 {
-	std::vector<std::pair<int, int> >::iterator start = vectorPairs.begin();
-	std::vector<std::pair<int, int> >::iterator end = vectorPairs.end();
+	std::vector<std::pair<int, int> >::iterator start = Pairs.begin();
+	std::vector<std::pair<int, int> >::iterator end = Pairs.end();
 	while ( start != end )
 	{
 		mydeque.push_back(start->first);
@@ -123,8 +115,8 @@ void	PmergeMe::InsertAtTheStartD(  )
 void	PmergeMe::SearchAndReplaceV( )
 {
 
-	std::vector<std::pair<int, int> >::iterator start = vectorPairs.begin();
-	std::vector<std::pair<int, int> >::iterator end = vectorPairs.end();
+	std::vector<std::pair<int, int> >::iterator start = Pairs.begin();
+	std::vector<std::pair<int, int> >::iterator end = Pairs.end();
 	
 	std::vector<int>::iterator result;
 
@@ -144,8 +136,8 @@ void	PmergeMe::SearchAndReplaceV( )
 void	PmergeMe::SearchAndReplaceD( )
 {
 
-	std::vector<std::pair<int, int> >::iterator start = vectorPairs.begin();
-	std::vector<std::pair<int, int> >::iterator end = vectorPairs.end();
+	std::vector<std::pair<int, int> >::iterator start = Pairs.begin();
+	std::vector<std::pair<int, int> >::iterator end = Pairs.end();
 	
 	std::deque<int>::iterator result;
 
@@ -165,29 +157,29 @@ void	PmergeMe::SearchAndReplaceD( )
 void	PmergeMe::SortVecor()
 {
 	printMessage( "Before: ", myvector.begin(), myvector.end());
-	start = GetTime();
+	start = std::clock();
 	GroupTheElements(myvector.begin(), myvector.end());
-	std::sort(vectorPairs.begin(), vectorPairs.end());
+	std::sort(Pairs.begin(), Pairs.end());
 	myvector.clear();
 	InsertAtTheStartV( );
 	SearchAndReplaceV( );
-	end = GetTime();
+	end = std::clock();
 	printMessage( "After: ", myvector.begin(), myvector.end());
-	std::cout << "Time to process a range of " << myvector.size() << " elements with std::vector : " << (double)(end - start) << " us" << std::endl; 
+	std::cout << "Time to process a range of " << myvector.size() << " elements with std::vector : " << std::setprecision(4) << 1000.00 * (end - start) / CLOCKS_PER_SEC << " ms" << std::endl; 
 }
 
 void	PmergeMe::SortDeque()
 {
 	/*printMessage( "Before: ", mydeque.begin(), mydeque.end());*/
-	start = GetTime();
+	start = std::clock();
 	GroupTheElements(mydeque.begin(), mydeque.end());
-	std::sort(vectorPairs.begin(), vectorPairs.end());
+	std::sort(Pairs.begin(), Pairs.end());
 	mydeque.clear();
 	InsertAtTheStartD( );
 	SearchAndReplaceD( );
-	end = GetTime();
+	end = std::clock();
 	/*printMessage( "After: ", mydeque.begin(), mydeque.end());*/
-	std::cout << "Time to process a range of " << mydeque.size() << " elements with std::deque : " << (end - start) << " us" << std::endl;
+	std::cout << "Time to process a range of " << mydeque.size() << " elements with std::deque : " << 1000.00 * (end - start) / CLOCKS_PER_SEC << " ms" << std::endl;
 }
 
 void	PmergeMe::MergeInsertionSort()

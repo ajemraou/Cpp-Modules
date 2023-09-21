@@ -17,9 +17,17 @@ int main( int ac, char **av )
 
 	if (ac > 2)
 	{
-		PmergeMe obj;
-		obj.parseArgs(av);
-		
-		obj.MergeInsertionSort();
+		PmergeMe	obj;
+		bool		status;
+
+		status = obj.parseArgs(av);
+		if (status == false)
+		{
+			std::cerr << "Error" << std::endl;
+		}
+		else
+		{
+			obj.MergeInsertionSort();
+		}
 	}
 }

@@ -171,6 +171,10 @@ void	BitcoinExchange::ParseAndDisplay()
 					{
 						number = std::atof(value.c_str());
 						it = DBase.lower_bound(key);
+						if ( it->first != key )
+						{
+							it--;
+						}
 						std::cout << it->first << " => " << number << " = " << number * it->second << std::endl;
 					}
 				}

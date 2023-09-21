@@ -14,6 +14,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <ctime>
 #include <iostream>
 #include <cctype>
 #include <deque>
@@ -30,16 +31,14 @@ class PmergeMe
 	std::vector<int>	myvector;
 	std::deque<int>		mydeque;
 	/* ------------------------ */
-	std::vector<std::pair<int, int> >	vectorPairs;
-	std::deque<std::pair<int, int> >	dequePairs;
+	std::vector<std::pair<int, int> >	Pairs;
 	/* -------------------------*/
-	std::pair<int, int>	pairs;
 
 	int					rest;
 	bool				paired;
 
-	long				start;
-	long				end;
+	std::clock_t start;
+	std::clock_t end;
 public:
 	PmergeMe(  );
 	
